@@ -23,20 +23,24 @@ namespace Pw_4
             get;
             set;
         }
-        internal int SumOfPair(Pair pair)
+        internal int SumOfPair()
         {
-            return pair.first+pair.second;
+            return first+second;
         }
-        internal (int,int) SumOfPair(Pair pair, Pair pair_2)
+        internal (int, int) SumOfPair(Pair pair_2)
         {
-            return (pair.first + pair_2.first, pair.second + pair_2.second);
+            first += pair_2.first;
+            second += pair_2.second;
+            return (first, second);
         }
-        internal (int, int) SumOfPair(Pair pair, Pair pair_2, Pair pair_3)
+        internal (int, int) SumOfPair(Pair pair_2, Pair pair_3)
         {
-            return (pair.first + pair_2.first + pair_3.first, pair.second + pair_2.second + pair_3.second);
+            first += pair_2.first + pair_3.first;
+            second += pair_2.second + pair_3.second;
+            return (first, second);
         }
 
-        internal (int, int) IncrementPrefix(Pair pair)
+        internal (int, int) IncrementPostFix(Pair pair)
         {
             return (pair.first++, pair.second++);
         }
