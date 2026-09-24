@@ -1,0 +1,30 @@
+﻿<Window x:Class="Pw_4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pw_4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Background="Black">
+    <Grid>
+        <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem Name="btn_about_programm" Header="О программе" Click="btn_about_programm_Click"/>
+            <MenuItem Name="btn_exit" Header="Выход" Click="btn_exit_Click"/>
+            <CheckBox Name="cb_WorkWithPair_ChoosePair" Content="Добавить объект в список/Использовать объекты из списка"/>
+        </Menu>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="lb_of_objects" Grid.Column="0" Margin="25"/>
+        <StackPanel Grid.Column="1" Margin="50" VerticalAlignment="Center">
+            <Label Content="Первый параметр//первый номер пары:" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBox x:Name="tb_first_parametr"/>
+            <Label Content="Второй параметр//второй номер пары:" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBox x:Name="tb_second_parametr"/>
+            <Button x:Name="btn_add_to_list"  Height="20" Margin="5" Content="Добавить в список"/>
+            <Button x:Name="btn_sum_pair_elements"  Height="20" Margin="5" Content="Сложить элементы пар" Visibility="Collapsed"/>
+        </StackPanel>
+    </Grid>
+</Window>
