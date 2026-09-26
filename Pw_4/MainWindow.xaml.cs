@@ -38,7 +38,7 @@ namespace Pw_4
 
         private void btn_sum_pair_elements_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void cb_WorkWithPair_ChoosePair_Click(object sender, RoutedEventArgs e)
