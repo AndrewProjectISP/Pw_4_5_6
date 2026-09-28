@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pw_4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Практическая работа №4, 5, 6" Height="650" Width="1050"
         Background="Black">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,9 +15,9 @@
         <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
             <MenuItem Name="btn_about_programm" Header="О программе" Click="btn_about_programm_Click"/>
             <MenuItem Name="btn_exit" Header="Выход" Click="btn_exit_Click"/>
-            <CheckBox Name="cb_WorkWithPair_ChoosePair" Content="Добавить объект в список/Использовать объекты из списка" Click="cb_WorkWithPair_ChoosePair_Click"/>
+            <CheckBox Name="cb_WorkWithPair_ChoosePair" Content="Добавить объект в список/Использовать объекты из списка" Checked="cb_WorkWithPair_ChoosePair_Checked" Unchecked="cb_WorkWithPair_ChoosePair_Unchecked"/>
         </Menu>
-        <ListBox x:Name="lb_of_objects" Grid.Column="0" Margin="25"/>
+        <ListBox x:Name="listBox_of_objects" Grid.Column="0" Margin="25" SelectionChanged="listBox_of_objects_SelectionChanged"/>
         <StackPanel Grid.Column="1" Margin="50" VerticalAlignment="Center">
             <Label x:Name="lbl_first" Content="Первый параметр:" Foreground="White" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_first_parametr"/>
@@ -26,6 +26,8 @@
             <Label Name="lbl_third" Content="Третий номер пары:" Foreground="White" Visibility="Collapsed" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_third_parametr" Visibility="Collapsed"/>
             <Button x:Name="btn_add_to_list"  Height="20" Margin="5" Content="Добавить в список" Click="btn_add_to_list_Click"/>
+            <Button x:Name="btn_change_item" Height="20" Margin="5" Content="Изменить" Click="btn_change_item_Click" Visibility="Collapsed"/>
+            <Button x:Name="btn_delete_item" Height="20" Margin="5" Content="Удалить из списка" Click="btn_delete_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_sum_pair_elements"  Height="20" Margin="5" Content="Сложить элементы пар" Visibility="Collapsed" Click="btn_sum_pair_elements_Click"/>
         </StackPanel>
     </Grid>
