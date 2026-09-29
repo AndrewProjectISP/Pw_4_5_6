@@ -20,6 +20,17 @@ namespace Pw_4
         {
             InitializeComponent();
         }
+        public void ClearFirstSecond()
+        {
+            tb_first_parametr.Clear();
+            tb_second_parametr.Clear();
+        }
+        public void ClearFirstSecondThird()
+        {
+            tb_first_parametr.Clear();
+            tb_second_parametr.Clear();
+            tb_third_parametr.Clear();
+        }
 
         private void btn_about_programm_Click(object sender, RoutedEventArgs e)
         {
@@ -36,8 +47,7 @@ namespace Pw_4
             try
             {
                 listBox_of_objects.Items.Add(new Pair(Convert.ToInt32(tb_first_parametr.Text), Convert.ToInt32(tb_second_parametr.Text), listBox_of_objects.Items.Count + 1));
-                tb_first_parametr.Clear();
-                tb_second_parametr.Clear();
+                ClearFirstSecond();
             }
             catch (Exception)
             {
@@ -48,7 +58,24 @@ namespace Pw_4
         {
             try
             {
-
+                if (rb_one_object.IsChecked == true)
+                {
+                    Pair pair = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_first_parametr.Text) - 1];
+                    MessageBox.Show($"Сумма элементов пары под номером {tb_first_parametr.Text} равна {pair.SumOfFirstSecond()}");
+                }
+                else if (rb_two_objects.IsChecked == true)
+                {
+                    Pair pair = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_first_parametr.Text) - 1];
+                    Pair pair2 = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_second_parametr.Text) - 1];
+                    MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text} равна {Pair.SumOfPair(pair, pair2)}");
+                }
+                else if (rb_three_objects.IsChecked == true)
+                {
+                    Pair pair = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_first_parametr.Text) - 1];
+                    Pair pair2 = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_second_parametr.Text) - 1];
+                    Pair pair3 = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_third_parametr.Text) - 1];
+                    MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text}, {tb_third_parametr.Text} равна {Pair.SumOfPair(pair, pair2, pair3)}");
+                }
             }
             catch (Exception)
             {
@@ -59,24 +86,26 @@ namespace Pw_4
         {
             lbl_first.Content = "Первый параметр:";
             lbl_second.Content = "Второй параметр";
-            tb_first_parametr.Clear();
-            tb_second_parametr.Clear();
-            tb_third_parametr.Clear();
+            ClearFirstSecondThird();
+            rb_one_object.Visibility = Visibility.Collapsed;
+            rb_two_objects.Visibility = Visibility.Collapsed;
             lbl_third.Visibility = Visibility.Collapsed;
             tb_third_parametr.Visibility = Visibility.Collapsed;
+            rb_three_objects.Visibility = Visibility.Collapsed;
             btn_add_to_list.Visibility = Visibility.Visible;
             btn_sum_pair_elements.Visibility = Visibility.Collapsed;
-
         }
 
         private void cb_WorkWithPair_ChoosePair_Checked(object sender, RoutedEventArgs e)
         {
             lbl_first.Content = "Первый номер пары:";
             lbl_second.Content = "Второй номер пары:";
-            tb_first_parametr.Clear();
-            tb_second_parametr.Clear();
+            ClearFirstSecond();
+            rb_one_object.Visibility = Visibility.Visible;
+            rb_two_objects.Visibility = Visibility.Visible;
             lbl_third.Visibility = Visibility.Visible;
             tb_third_parametr.Visibility = Visibility.Visible;
+            rb_three_objects.Visibility = Visibility.Visible;
             btn_add_to_list.Visibility = Visibility.Collapsed;
             btn_sum_pair_elements.Visibility = Visibility.Visible;
         }
@@ -121,8 +150,7 @@ namespace Pw_4
                     pair.first = first_fromTB;
                     pair.second = second_fromTB;
                     listBox_of_objects.Items[listBox_of_objects.SelectedIndex] = pair;
-                    tb_first_parametr.Clear();
-                    tb_second_parametr.Clear();
+                    ClearFirstSecond();
                 }
             }
             catch (Exception)
@@ -133,8 +161,28 @@ namespace Pw_4
         private void btn_delete_item_Click(object sender, RoutedEventArgs e)
         {
             listBox_of_objects.Items.RemoveAt(listBox_of_objects.SelectedIndex);
-            tb_first_parametr.Clear();
-            tb_second_parametr.Clear();
+            ClearFirstSecond();
+        }
+
+        private void rb_one_object_Click(object sender, RoutedEventArgs e)
+        {   
+            ClearFirstSecondThird();
+            tb_second_parametr.IsEnabled = false;
+            tb_third_parametr.IsEnabled = false;
+        }
+
+        private void rb_two_objects_Click(object sender, RoutedEventArgs e)
+        {
+            ClearFirstSecondThird();
+            tb_second_parametr.IsEnabled = true;
+            tb_third_parametr.IsEnabled = false;
+        }
+
+        private void rb_three_objects_Click(object sender, RoutedEventArgs e)
+        {
+            ClearFirstSecondThird();
+            tb_second_parametr.IsEnabled = true;
+            tb_third_parametr.IsEnabled = true;
         }
     }
 }
