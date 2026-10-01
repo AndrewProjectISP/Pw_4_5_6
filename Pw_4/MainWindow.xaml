@@ -17,22 +17,25 @@
             <MenuItem Name="btn_about_programm" Header="О программе" Click="btn_about_programm_Click"/>
             <MenuItem Name="btn_exit" Header="Выход" Click="btn_exit_Click"/>
             <CheckBox Name="cb_WorkWithPair_ChoosePair" Content="Добавить объект в список/Использовать объекты из списка" Checked="cb_WorkWithPair_ChoosePair_Checked" Unchecked="cb_WorkWithPair_ChoosePair_Unchecked" IsChecked="False"/>
+            <CheckBox Name="cb_WorkWithMoney_ChooseMoneyOrPair" Content="Использовать Пару чисел/Использовать Рубли" Checked="cb_WorkWithMoney_ChooseMoneyOrPair_Checked" Unchecked="cb_WorkWithMoney_ChooseMoneyOrPair_Unchecked" IsChecked="False"/>
         </Menu>
         <ListBox x:Name="listBox_of_objects" Grid.Column="0" Margin="25" SelectionChanged="listBox_of_objects_SelectionChanged"/>
         <StackPanel Grid.Column="1" Margin="50" VerticalAlignment="Center">
             <Label x:Name="lbl_first" Content="Первый параметр:" Foreground="White" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_first_parametr"/>
-            <RadioButton x:Name="rb_one_object" Content="Один объект" Foreground="White" Visibility="Collapsed" Checked="rb_one_object_Checked"/>
             <Label x:Name="lbl_second" Content="Второй параметр:" Foreground="White" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_second_parametr"/>
-            <RadioButton x:Name="rb_two_objects" Content="Два объекта" Foreground="White" Visibility="Collapsed" Checked="rb_two_objects_Checked"/>
             <Label Name="lbl_third" Content="Третий номер пары:" Foreground="White" Visibility="Collapsed" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_third_parametr" Visibility="Collapsed"/>
+            <RadioButton x:Name="rb_one_object" Content="Один объект" Foreground="White" Visibility="Collapsed" Checked="rb_one_object_Checked"/>
+            <RadioButton x:Name="rb_two_objects" Content="Два объекта" Foreground="White" Visibility="Collapsed" Checked="rb_two_objects_Checked"/>
             <RadioButton x:Name="rb_three_objects" Content="Три объекта" Foreground="White" Visibility="Collapsed" Checked="rb_three_objects_Checked" IsChecked="True"/>
             <Button x:Name="btn_add_to_list"  Height="20" Margin="5" Content="Добавить в список" Click="btn_add_to_list_Click"/>
             <Button x:Name="btn_change_item" Height="20" Margin="5" Content="Изменить" Click="btn_change_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_delete_item" Height="20" Margin="5" Content="Удалить из списка" Click="btn_delete_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_sum_pair_elements"  Height="20" Margin="5" Content="Сложить элементы пар(ы)" Visibility="Collapsed" Click="btn_sum_pair_elements_Click"/>
+            <Button x:Name="btn_divide_money_elements"  Height="20" Margin="5" Content="Разделить пару на элемент" Visibility="Collapsed" Click="btn_divide_money_elements_Click"/>
+            <Button x:Name="btn_difference_money_elements"  Height="20" Margin="5" Content="Найти разность пар" Visibility="Collapsed" Click="btn_difference_money_elements_Click"/>
         </StackPanel>
     </Grid>
 </Window>

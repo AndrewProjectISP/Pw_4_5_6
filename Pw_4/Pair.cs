@@ -39,7 +39,7 @@ namespace Pw_4
         {
             return (pair.first++, pair.second++);
         }
-        public (int, int) IncrementPreFix(Pair pair)
+        public virtual (int, int) IncrementPreFix(Pair pair)
         {
             return (++pair.first, ++pair.second);
         }
