@@ -58,9 +58,9 @@ namespace Pw_4
         }
         private void btn_sum_pair_elements_Click(object sender, RoutedEventArgs e)
         {
-            bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr);
-            bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
-            bool parsingThird = int.TryParse(tb_third_parametr.Text, out int thirdParametr);
+            bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr); firstParametr -= 1;
+            bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr); secondParametr -= 1;
+            bool parsingThird = int.TryParse(tb_third_parametr.Text, out int thirdParametr); thirdParametr -= 1;
             bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count;
             bool notIndexOutOfArrayException_second = secondParametr < listBox_of_objects.Items.Count;
             bool notIndexOutOfArrayException_third = thirdParametr < listBox_of_objects.Items.Count;

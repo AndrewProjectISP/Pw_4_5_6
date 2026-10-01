@@ -14,8 +14,8 @@ namespace Pw_4
         {
             first = x; second = y; Number = number;
         }
-        public int first { get; set; }
-        public int second { get; set; }
+        public virtual int first { get; set; }
+        public virtual int second { get; set; }
         private int _number;
         public int Number { get { return _number; } private set { if (value > 0) _number = value; } }
         public override string ToString()
@@ -39,7 +39,7 @@ namespace Pw_4
         {
             return (pair.first++, pair.second++);
         }
-        public virtual (int, int) IncrementPreFix(Pair pair)
+        public (int, int) IncrementPreFix(Pair pair)
         {
             return (++pair.first, ++pair.second);
         }
