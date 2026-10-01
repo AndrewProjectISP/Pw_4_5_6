@@ -16,7 +16,7 @@ namespace Pw_4
     /// </summary>
     public partial class MainWindow : Window
     {
-        Exception ex = new Exception();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,46 +45,60 @@ namespace Pw_4
 
         private void btn_add_to_list_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
             {
-                listBox_of_objects.Items.Add(new Pair(Convert.ToInt32(tb_first_parametr.Text), Convert.ToInt32(tb_second_parametr.Text), listBox_of_objects.Items.Count + 1));
+                listBox_of_objects.Items.Add(new Pair(firstParametr, secondParametr, listBox_of_objects.Items.Count + 1));
                 ClearFirstSecond();
             }
-            catch (Exception)
+            else
             {
+                ClearFirstSecond();
                 MessageBox.Show("Неккоректно введенные данные");
             }
         }
         private void btn_sum_pair_elements_Click(object sender, RoutedEventArgs e)
         {
-            try
+            bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr);
+            bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
+            bool parsingThird = int.TryParse(tb_third_parametr.Text, out int thirdParametr);
+            bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count;
+            bool notIndexOutOfArrayException_second = secondParametr < listBox_of_objects.Items.Count;
+            bool notIndexOutOfArrayException_third = thirdParametr < listBox_of_objects.Items.Count;
+
+            if (rb_one_object.IsChecked == true) 
             {
-                if (rb_one_object.IsChecked == true)
+                if (parsingFirst && notIndexOutOfArrayException_first)
                 {
-                    Pair pair = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_first_parametr.Text) - 1];
+                    Pair pair = (Pair)listBox_of_objects.Items[firstParametr];
                     MessageBox.Show($"Сумма элементов пары под номером {tb_first_parametr.Text} равна {pair.SumOfFirstSecond()}");
                 }
-                else if (rb_two_objects.IsChecked == true)
+                else MessageBox.Show("Индекс вне массива / Неккоректно введенные данные");
+            }
+            else if (rb_two_objects.IsChecked == true) 
+            {
+                if (parsingFirst && parsingSecond && notIndexOutOfArrayException_first && notIndexOutOfArrayException_second )
                 {
-                    Pair pair = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_first_parametr.Text) - 1];
-                    Pair pair2 = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_second_parametr.Text) - 1];
+                    Pair pair = (Pair)listBox_of_objects.Items[firstParametr];
+                    Pair pair2 = (Pair)listBox_of_objects.Items[secondParametr];
                     MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text} равна {Pair.SumOfPair(pair, pair2)}");
                 }
-                else if (rb_three_objects.IsChecked == true)
+                else MessageBox.Show("Индекс вне массива / Неккоректно введенные данные");
+            }
+            else if (rb_three_objects.IsChecked == true)
+            {
+                if (parsingFirst && parsingSecond && parsingThird && notIndexOutOfArrayException_first && notIndexOutOfArrayException_second && notIndexOutOfArrayException_third)
                 {
-                    Pair pair = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_first_parametr.Text) - 1];
-                    Pair pair2 = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_second_parametr.Text) - 1];
-                    Pair pair3 = (Pair)listBox_of_objects.Items[Convert.ToInt32(tb_third_parametr.Text) - 1];
+                    Pair pair = (Pair)listBox_of_objects.Items[firstParametr];
+                    Pair pair2 = (Pair)listBox_of_objects.Items[secondParametr];
+                    Pair pair3 = (Pair)listBox_of_objects.Items[thirdParametr];
                     MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text}, {tb_third_parametr.Text} равна {Pair.SumOfPair(pair, pair2, pair3)}");
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неккоректно введенные данные");
+                else MessageBox.Show("Индекс вне массива / Неккоректно введенные данные");
             }
         }
         private void cb_WorkWithPair_ChoosePair_Unchecked(object sender, RoutedEventArgs e)
         {
+            listBox_of_objects.IsHitTestVisible = true;
             rb_three_objects.IsChecked = true;
             lbl_first.Content = "Первый параметр:";
             lbl_second.Content = "Второй параметр";
@@ -100,6 +114,8 @@ namespace Pw_4
 
         private void cb_WorkWithPair_ChoosePair_Checked(object sender, RoutedEventArgs e)
         {
+            listBox_of_objects.IsHitTestVisible = false;
+            listBox_of_objects.SelectedIndex = -1;
             lbl_first.Content = "Первый номер пары:";
             lbl_second.Content = "Второй номер пары:";
             ClearFirstSecond();
@@ -113,49 +129,44 @@ namespace Pw_4
         }
         private void listBox_of_objects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cb_WorkWithPair_ChoosePair.IsChecked == false)
+            if (listBox_of_objects.SelectedIndex == -1)
             {
-                if (listBox_of_objects.SelectedIndex == -1)
-                {
-                    btn_delete_item.Visibility = Visibility.Collapsed;
-                    btn_change_item.Visibility = Visibility.Collapsed;
-                }
-                else if (btn_delete_item.Visibility == Visibility.Visible)
-                {
-                    Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-                    tb_first_parametr.Text = $"{pair.first}";
-                    tb_second_parametr.Text = $"{pair.second}";
-                }
-                else
-                {
-                    btn_delete_item.Visibility = Visibility.Visible;
-                    btn_change_item.Visibility = Visibility.Visible;
-                    Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-                    tb_first_parametr.Text = $"{pair.first}";
-                    tb_second_parametr.Text = $"{pair.second}";
-                }
+                btn_delete_item.Visibility = Visibility.Collapsed;
+                btn_change_item.Visibility = Visibility.Collapsed;
+            }
+            else if (btn_delete_item.Visibility == Visibility.Visible)
+            {
+                Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                tb_first_parametr.Text = $"{pair.first}";
+                tb_second_parametr.Text = $"{pair.second}";
+            }
+            else
+            {
+                btn_delete_item.Visibility = Visibility.Visible;
+                btn_change_item.Visibility = Visibility.Visible;
+                Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                tb_first_parametr.Text = $"{pair.first}";
+                tb_second_parametr.Text = $"{pair.second}";
             }
         }
         private void btn_change_item_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int first_fromTB = Convert.ToInt32(tb_first_parametr.Text);
-                int second_fromTB = Convert.ToInt32(tb_second_parametr.Text);
+            if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
+            { 
                 Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-                if ((pair.first == first_fromTB) && (pair.second == second_fromTB))
+                if ((pair.first == firstParametr) && (pair.second == secondParametr))
                 {
                     MessageBox.Show("Введенные параметры ничем ни отличаются от уже имеющихся, изменение не применено");
                 }
                 else
                 {
-                    pair.first = first_fromTB;
-                    pair.second = second_fromTB;
+                    pair.first = firstParametr;
+                    pair.second = secondParametr;
                     listBox_of_objects.Items[listBox_of_objects.SelectedIndex] = pair;
                     ClearFirstSecond();
                 }
             }
-            catch (Exception)
+            else
             {
                 MessageBox.Show("Неккоректно введенные данные");
             }
