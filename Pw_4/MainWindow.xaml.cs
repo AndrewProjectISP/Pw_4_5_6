@@ -16,6 +16,7 @@ namespace Pw_4
     /// </summary>
     public partial class MainWindow : Window
     {
+        Exception ex = new Exception();
         public MainWindow()
         {
             InitializeComponent();
@@ -84,6 +85,7 @@ namespace Pw_4
         }
         private void cb_WorkWithPair_ChoosePair_Unchecked(object sender, RoutedEventArgs e)
         {
+            rb_three_objects.IsChecked = true;
             lbl_first.Content = "Первый параметр:";
             lbl_second.Content = "Второй параметр";
             ClearFirstSecondThird();
@@ -164,21 +166,21 @@ namespace Pw_4
             ClearFirstSecond();
         }
 
-        private void rb_one_object_Click(object sender, RoutedEventArgs e)
+        private void rb_one_object_Checked(object sender, RoutedEventArgs e)
         {   
             ClearFirstSecondThird();
             tb_second_parametr.IsEnabled = false;
             tb_third_parametr.IsEnabled = false;
         }
 
-        private void rb_two_objects_Click(object sender, RoutedEventArgs e)
+        private void rb_two_objects_Checked(object sender, RoutedEventArgs e)
         {
             ClearFirstSecondThird();
             tb_second_parametr.IsEnabled = true;
             tb_third_parametr.IsEnabled = false;
         }
 
-        private void rb_three_objects_Click(object sender, RoutedEventArgs e)
+        private void rb_three_objects_Checked(object sender, RoutedEventArgs e)
         {
             ClearFirstSecondThird();
             tb_second_parametr.IsEnabled = true;

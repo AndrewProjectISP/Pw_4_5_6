@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Pw_4"
         mc:Ignorable="d"
         Title="Практическая работа №4, 5, 6" Height="650" Width="1050"
-        Background="Black">
+        Background="Black"
+        MinWidth="800" MinHeight="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,13 +22,13 @@
         <StackPanel Grid.Column="1" Margin="50" VerticalAlignment="Center">
             <Label x:Name="lbl_first" Content="Первый параметр:" Foreground="White" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_first_parametr"/>
-            <RadioButton x:Name="rb_one_object" Content="Один объект" Foreground="White" Visibility="Collapsed" Click="rb_one_object_Click"/>
+            <RadioButton x:Name="rb_one_object" Content="Один объект" Foreground="White" Visibility="Collapsed" Checked="rb_one_object_Checked"/>
             <Label x:Name="lbl_second" Content="Второй параметр:" Foreground="White" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_second_parametr"/>
-            <RadioButton x:Name="rb_two_objects" Content="Два объекта" Foreground="White" Visibility="Collapsed" Click="rb_two_objects_Click"/>
+            <RadioButton x:Name="rb_two_objects" Content="Два объекта" Foreground="White" Visibility="Collapsed" Checked="rb_two_objects_Checked"/>
             <Label Name="lbl_third" Content="Третий номер пары:" Foreground="White" Visibility="Collapsed" HorizontalAlignment="Center"/>
             <TextBox x:Name="tb_third_parametr" Visibility="Collapsed"/>
-            <RadioButton x:Name="rb_three_objects" Content="Три объекта" Foreground="White" Visibility="Collapsed" Click="rb_three_objects_Click" IsChecked="True"/>
+            <RadioButton x:Name="rb_three_objects" Content="Три объекта" Foreground="White" Visibility="Collapsed" Checked="rb_three_objects_Checked" IsChecked="True"/>
             <Button x:Name="btn_add_to_list"  Height="20" Margin="5" Content="Добавить в список" Click="btn_add_to_list_Click"/>
             <Button x:Name="btn_change_item" Height="20" Margin="5" Content="Изменить" Click="btn_change_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_delete_item" Height="20" Margin="5" Content="Удалить из списка" Click="btn_delete_item_Click" Visibility="Collapsed"/>

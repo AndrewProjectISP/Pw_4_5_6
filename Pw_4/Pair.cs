@@ -8,7 +8,7 @@ using System.Xml.XPath;
 
 namespace Pw_4
 {
-    internal class Pair
+    public class Pair : ISummableOfSomePair<Pair>, IPair
     {
         public Pair(int x, int y, int number)
         {
@@ -39,7 +39,7 @@ namespace Pw_4
         {
             return (pair.first++, pair.second++);
         }
-        public (int, int) IncrementPreFix(Pair pair)
+        public virtual (int, int) IncrementPreFix(Pair pair)
         {
             return (++pair.first, ++pair.second);
         }
