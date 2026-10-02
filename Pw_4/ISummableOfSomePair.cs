@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pw_4
 {
-    public interface ISummableOfSomePair<Tself> where Tself : IPair
+    public interface ISummableOfSomePair<Tself> : IPair where Tself : IPair
     {
-        static abstract (int, int) SumOfPair(Tself pair1, Tself pair2);
-        static abstract (int, int) SumOfPair(Tself pair, Tself pair2, Tself pair3);
+        (int, int) SumOfPair(Tself pair1, Tself pair2);
+        (int, int) SumOfPair(Tself pair, Tself pair2, Tself pair3);
     }
 }

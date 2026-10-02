@@ -45,15 +45,31 @@ namespace Pw_4
 
         private void btn_add_to_list_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
+            if (cb_WorkWithMoney_ChooseMoneyOrPair.IsChecked == false )
             {
-                listBox_of_objects.Items.Add(new Pair(firstParametr, secondParametr, listBox_of_objects.Items.Count + 1));
-                ClearFirstSecond();
+                if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
+                {
+                    listBox_of_objects.Items.Add(new Pair(firstParametr, secondParametr, listBox_of_objects.Items.Count + 1));
+                    ClearFirstSecond();
+                }
+                else
+                {
+                    ClearFirstSecond();
+                    MessageBox.Show("Неккоректно введенные данные");
+                }
             }
-            else
+            else if (cb_WorkWithMoney_ChooseMoneyOrPair.IsChecked == true)
             {
-                ClearFirstSecond();
-                MessageBox.Show("Неккоректно введенные данные");
+                if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
+                {
+                    listBox_of_objects.Items.Add(new Money(firstParametr, secondParametr, listBox_of_objects.Items.Count + 1));
+                    ClearFirstSecond();
+                }
+                else
+                {
+                    ClearFirstSecond();
+                    MessageBox.Show("Неккоректно введенные данные");
+                }
             }
         }
         private void btn_sum_pair_elements_Click(object sender, RoutedEventArgs e)
@@ -78,9 +94,9 @@ namespace Pw_4
             {
                 if (parsingFirst && parsingSecond && notIndexOutOfArrayException_first && notIndexOutOfArrayException_second )
                 {
-                    IPair pair = (IPair)listBox_of_objects.Items[firstParametr];
-                    IPair pair2 = (IPair)listBox_of_objects.Items[secondParametr];
-                    MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text} равна {ISummableOfSomePair<IPair>.SumOfPair(pair, pair2)}");
+                    ISummableOfSomePair<IPair> pair = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[firstParametr];
+                    ISummableOfSomePair<IPair> pair2 = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[secondParametr];
+                    MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text} равна {pair.SumOfPair(pair, pair2)}");
                 }
                 else MessageBox.Show("Индекс вне массива / Неккоректно введенные данные");
             }
@@ -88,13 +104,42 @@ namespace Pw_4
             {
                 if (parsingFirst && parsingSecond && parsingThird && notIndexOutOfArrayException_first && notIndexOutOfArrayException_second && notIndexOutOfArrayException_third)
                 {
-                    IPair pair = (IPair)listBox_of_objects.Items[firstParametr];
-                    IPair pair2 = (IPair)listBox_of_objects.Items[secondParametr];
-                    IPair pair3 = (IPair)listBox_of_objects.Items[thirdParametr];
-                    MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text}, {tb_third_parametr.Text} равна {ISummableOfSomePair<IPair>.SumOfPair(pair, pair2, pair3)}");
+                    ISummableOfSomePair<IPair> pair = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[firstParametr];
+                    ISummableOfSomePair<IPair> pair2 = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[secondParametr];
+                    ISummableOfSomePair<IPair> pair3 = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[thirdParametr];
+                    MessageBox.Show($"Сумма элементов пар под номерами {tb_first_parametr.Text}, {tb_second_parametr.Text}, {tb_third_parametr.Text} равна {pair.SumOfPair(pair, pair2, pair3)}");
                 }
                 else MessageBox.Show("Индекс вне массива / Неккоректно введенные данные");
             }
+        }
+        private void btn_divide_money_elements_Click(object sender, RoutedEventArgs e)
+        {
+            bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr); firstParametr -= 1;
+            bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
+            bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count;
+            if (parsingFirst && parsingSecond && notIndexOutOfArrayException_first)
+            {
+                Money money = (Money)listBox_of_objects.Items[firstParametr];
+                MessageBox.Show($"Деление счета {money.ToString()} на {secondParametr} = {Money.DivideOfPair(money, secondParametr)}");
+            }
+            else
+                MessageBox.Show("Неккоректно введеные данные");
+        }
+
+        private void btn_difference_money_elements_Click(object sender, RoutedEventArgs e)
+        {
+            bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr); firstParametr -= 1;
+            bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr); secondParametr -= 1;
+            bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count;
+            bool notIndexOutOfArrayException_second = secondParametr < listBox_of_objects.Items.Count;
+            if (parsingFirst && parsingSecond && notIndexOutOfArrayException_first && notIndexOutOfArrayException_second)
+            {
+                Money money = (Money)listBox_of_objects.Items[firstParametr];
+                Money money2 = (Money)listBox_of_objects.Items[secondParametr];
+                MessageBox.Show($"Разница счетов {money.ToString()} и {money2.ToString()} = {Money.DifferenceOfPair(money, money2)}");
+            }
+            else
+                MessageBox.Show("Неккоректно введеные данные");
         }
         private void cb_WorkWithPair_ChoosePair_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -221,16 +266,6 @@ namespace Pw_4
         {
 
             listBox_of_objects.Items.Clear();
-        }
-
-        private void btn_divide_money_elements_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_difference_money_elements_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

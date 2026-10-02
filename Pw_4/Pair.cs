@@ -8,7 +8,7 @@ using System.Xml.XPath;
 
 namespace Pw_4
 {
-    public class Pair : ISummableOfSomePair<Pair>, IPair
+    public class Pair : ISummableOfSomePair<Pair>
     {
         public Pair(int x, int y, int number)
         {
@@ -26,11 +26,11 @@ namespace Pw_4
         {
             return first+second;
         }
-        public static (int, int) SumOfPair(Pair pair1,Pair pair2)
+        public (int, int) SumOfPair(Pair pair1,Pair pair2)
         {
             return (pair1.first + pair2.first, pair1.second + pair2.second);
         }
-        public static (int, int) SumOfPair(Pair pair,Pair pair2, Pair pair3)
+        public (int, int) SumOfPair(Pair pair,Pair pair2, Pair pair3)
         {
             return (pair.first + pair2.first + pair3.first, pair.second + pair2.second + pair3.second);
         }

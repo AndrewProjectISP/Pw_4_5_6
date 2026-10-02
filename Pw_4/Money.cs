@@ -21,7 +21,7 @@ namespace Pw_4
             }
         }
         public override int second { get => base.second; set { if (value < 0 || value >= 100) throw new ArgumentException("Неккоректно введенные аргументы: копейки должны быть в диапазоне от 0 до 99"); } }
-        public static (int, int) SumOfPair(Money money, Money money2)
+        public (int, int) SumOfPair(Money money, Money money2)
         {
             int rubles = money.first + money2.first;
             int kopeks = money.second + money2.second;
@@ -32,7 +32,7 @@ namespace Pw_4
             }
             return (rubles, kopeks);
         }
-        public static (int, int) SumOfPair(Money money, Money money2, Money money3)
+        public (int, int) SumOfPair(Money money, Money money2, Money money3)
         {
             int rubles = money.first + money2.first + money3.first;
             int kopeks = money.second + money2.second + money3.second;
