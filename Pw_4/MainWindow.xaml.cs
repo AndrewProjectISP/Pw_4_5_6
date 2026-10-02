@@ -45,7 +45,7 @@ namespace Pw_4
 
         private void btn_add_to_list_Click(object sender, RoutedEventArgs e)
         {
-            if (cb_WorkWithMoney_ChooseMoneyOrPair.IsChecked == false )
+            if (cb_WorkWithMoney_ChooseMoneyOrPair.IsChecked == false)
             {
                 if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
                 {
