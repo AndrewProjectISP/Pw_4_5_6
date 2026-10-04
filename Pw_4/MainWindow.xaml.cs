@@ -54,7 +54,7 @@ namespace Pw_4
                 }
                 else
                 {
-                    ClearFirstSecond();
+                    ClearFirstSecond(); 
                     MessageBox.Show("Неккоректно введенные данные");
                 }
             }
@@ -103,7 +103,7 @@ namespace Pw_4
             else if (rb_three_objects.IsChecked == true)
             {
                 if (parsingFirst && parsingSecond && parsingThird && notIndexOutOfArrayException_first && notIndexOutOfArrayException_second && notIndexOutOfArrayException_third)
-                {
+                { 
                     ISummableOfSomePair<IPair> pair = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[firstParametr];
                     ISummableOfSomePair<IPair> pair2 = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[secondParametr];
                     ISummableOfSomePair<IPair> pair3 = (ISummableOfSomePair<IPair>)listBox_of_objects.Items[thirdParametr];
@@ -112,7 +112,7 @@ namespace Pw_4
                 else MessageBox.Show("Индекс вне массива / Неккоректно введенные данные");
             }
         }
-        private void btn_divide_money_elements_Click(object sender, RoutedEventArgs e)
+        private void btn_divide_money_elemets_Click(object sender, RoutedEventArgs e)
         {
             bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr); firstParametr -= 1;
             bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
@@ -185,7 +185,7 @@ namespace Pw_4
             }
             else if (btn_delete_item.Visibility == Visibility.Visible)
             {
-                Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                IPair pair = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
                 tb_first_parametr.Text = $"{pair.first}";
                 tb_second_parametr.Text = $"{pair.second}";
             }
@@ -193,7 +193,7 @@ namespace Pw_4
             {
                 btn_delete_item.Visibility = Visibility.Visible;
                 btn_change_item.Visibility = Visibility.Visible;
-                Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                IPair pair = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
                 tb_first_parametr.Text = $"{pair.first}";
                 tb_second_parametr.Text = $"{pair.second}";
             }
@@ -264,8 +264,8 @@ namespace Pw_4
         }
         private void cb_WorkWithMoney_ChooseMoneyOrPair_Checked(object sender, RoutedEventArgs e)
         {
-
             listBox_of_objects.Items.Clear();
         }
+
     }
 }

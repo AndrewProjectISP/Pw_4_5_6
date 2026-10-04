@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Pw_4
 {
-    public class Money : Pair, ISummableOfSomePair<Money>
+    public class Money : Pair, ISummableOfSomePair<IPair>
     {
         public Money(int rubles, int kopeks, int number) : base(rubles, kopeks, number) { }
         public override int first 
@@ -20,8 +21,21 @@ namespace Pw_4
                 base.first = value;
             }
         }
-        public override int second { get => base.second; set { if (value < 0 || value >= 100) throw new ArgumentException("Неккоректно введенные аргументы: копейки должны быть в диапазоне от 0 до 99"); } }
-        public (int, int) SumOfPair(Money money, Money money2)
+        public override int second 
+        {
+            get => base.second;
+            set
+            {
+                if (value < 0) throw new ArgumentException("Количество копеек не может быть меньше нуля");
+                else
+                {
+                    base.second = value % 100;
+                    int countRubles = value / 100;
+                    if (countRubles > 0) base.first += countRubles;
+                }
+            }
+        }
+        public override (int, int) SumOfPair(IPair money, IPair money2)
         {
             int rubles = money.first + money2.first;
             int kopeks = money.second + money2.second;
@@ -32,34 +46,24 @@ namespace Pw_4
             }
             return (rubles, kopeks);
         }
-        public (int, int) SumOfPair(Money money, Money money2, Money money3)
+        public override (int, int) SumOfPair(IPair money, IPair money2, IPair money3)
         {
             int rubles = money.first + money2.first + money3.first;
-            int kopeks = money.second + money2.second + money3.second;
-            while (kopeks >= 100)
-            {
-                rubles += 1;
-                kopeks -= 100;
-            }
+            int kopeks = (money.second + money2.second + money3.second) % 100;
+            int temp = kopeks / 100;
+            if (temp > 0) rubles += temp;
             return (rubles, kopeks);
         }
         public static (int, int) DifferenceOfPair(Money money, Money money2)
         {
-            if (money.first > money2.first)
+            int rubles = money.first - money2.first;
+            if (money.second < money2.second)
             {
-                int rubles = money.first - money2.first;
-                if (money.second < money2.second)
-                {
-                    rubles -= 1;
-                    money.second += 100;
-                }
-                int kopeks = money.second - money2.second;
-                return (rubles, kopeks);
+                rubles -= 1;
+                money.second += 100;
             }
-            else
-            {
-                throw new ArgumentException("Неккоректно введенные аргументы: баланс не может быть отрицательным");
-            }
+            int kopeks = money.second - money2.second;
+            return (rubles, kopeks);
         }
         public static Money DivideOfPair(Money money, int number)
         {
@@ -71,5 +75,9 @@ namespace Pw_4
         {
             return $"Money №{Number}";
         }
+    }
+    public class MoneyException : Exception
+    {
+        public MoneyException(string message) : base(message) { }
     }
 }

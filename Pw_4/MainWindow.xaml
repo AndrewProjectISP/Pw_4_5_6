@@ -34,7 +34,7 @@
             <Button x:Name="btn_change_item" Height="20" Margin="5" Content="Изменить" Click="btn_change_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_delete_item" Height="20" Margin="5" Content="Удалить из списка" Click="btn_delete_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_sum_pair_elements"  Height="20" Margin="5" Content="Сложить элементы пар(ы)" Visibility="Collapsed" Click="btn_sum_pair_elements_Click"/>
-            <Button x:Name="btn_divide_money_elements"  Height="20" Margin="5" Content="Разделить пару на элемент" Visibility="Collapsed" Click="btn_divide_money_elements_Click"/>
+            <Button x:Name="btn_divide_money_elements"  Height="20" Margin="5" Content="Разделить пару на элемент" Visibility="Collapsed" Click="btn_divide_money_elemets_Click"/>
             <Button x:Name="btn_difference_money_elements"  Height="20" Margin="5" Content="Найти разность пар" Visibility="Collapsed" Click="btn_difference_money_elements_Click"/>
         </StackPanel>
     </Grid>

@@ -8,14 +8,14 @@ using System.Xml.XPath;
 
 namespace Pw_4
 {
-    public class Pair : ISummableOfSomePair<Pair>
+    public class Pair : ISummableOfSomePair<IPair>
     {
+        public virtual int first { get; set; }
+        public virtual int second { get; set; }
         public Pair(int x, int y, int number)
         {
             first = x; second = y; Number = number;
         }
-        public virtual int first { get; set; }
-        public virtual int second { get; set; }
         private int _number;
         public int Number { get { return _number; } private set { if (value > 0) _number = value; } }
         public override string ToString()
@@ -26,11 +26,11 @@ namespace Pw_4
         {
             return first+second;
         }
-        public (int, int) SumOfPair(Pair pair1,Pair pair2)
+        public virtual (int, int) SumOfPair(IPair pair1, IPair pair2)
         {
             return (pair1.first + pair2.first, pair1.second + pair2.second);
         }
-        public (int, int) SumOfPair(Pair pair,Pair pair2, Pair pair3)
+        public virtual (int, int) SumOfPair(IPair pair, IPair pair2, IPair pair3)
         {
             return (pair.first + pair2.first + pair3.first, pair.second + pair2.second + pair3.second);
         }
