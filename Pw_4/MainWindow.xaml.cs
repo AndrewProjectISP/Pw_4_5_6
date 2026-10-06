@@ -60,7 +60,7 @@ namespace Pw_4
             }
             else if (cb_WorkWithMoney_ChooseMoneyOrPair.IsChecked == true)
             {
-                if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
+                if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr) && firstParametr >= 0 && secondParametr >= 0)
                 {
                     listBox_of_objects.Items.Add(new Money(firstParametr, secondParametr, listBox_of_objects.Items.Count + 1));
                     ClearFirstSecond();
@@ -77,9 +77,9 @@ namespace Pw_4
             bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr); firstParametr -= 1;
             bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr); secondParametr -= 1;
             bool parsingThird = int.TryParse(tb_third_parametr.Text, out int thirdParametr); thirdParametr -= 1;
-            bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count;
-            bool notIndexOutOfArrayException_second = secondParametr < listBox_of_objects.Items.Count;
-            bool notIndexOutOfArrayException_third = thirdParametr < listBox_of_objects.Items.Count;
+            bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count && firstParametr >= 0;
+            bool notIndexOutOfArrayException_second = secondParametr < listBox_of_objects.Items.Count && secondParametr >= 0;
+            bool notIndexOutOfArrayException_third = thirdParametr < listBox_of_objects.Items.Count && thirdParametr >= 0;
 
             if (rb_one_object.IsChecked == true) 
             {
