@@ -118,7 +118,7 @@ namespace Pw_4
             bool parsingFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr); firstParametr -= 1;
             bool parsingSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
             bool notIndexOutOfArrayException_first = firstParametr < listBox_of_objects.Items.Count;
-            if (parsingFirst && parsingSecond && notIndexOutOfArrayException_first)
+            if (parsingFirst && parsingSecond && notIndexOutOfArrayException_first && secondParametr > 0)
             {
                 Money money = (Money)listBox_of_objects.Items[firstParametr];
                 MessageBox.Show($"Деление счета {money.ToString()} на {secondParametr} = {Money.DivideOfPair(money, secondParametr)}");
@@ -204,14 +204,18 @@ namespace Pw_4
             bool TryParseFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr);
             bool TryParseSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
             pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-            if ((TryParseFirst && TryParseSecond) && (pairForChange is Pair))
+            if ((TryParseFirst && TryParseSecond) && (pairForChange is not Money))
             {
                 ChangeItem(pairForChange, firstParametr, secondParametr, listBox_of_objects);
             }
             else if ((TryParseFirst && TryParseSecond) && (pairForChange is Money))
             {
                 if (firstParametr >= 0 && secondParametr >= 0) ChangeItem(pairForChange, firstParametr, secondParametr, listBox_of_objects);
-                else MessageBox.Show("Деньги не могут быть отрицательными");
+                else 
+                {
+                    ClearFirstSecond();
+                    MessageBox.Show("Деньги не могут быть отрицательными");
+                } 
             }
             else
             {

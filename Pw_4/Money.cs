@@ -65,11 +65,11 @@ namespace Pw_4
             int kopeks = money.second - money2.second;
             return (rubles, kopeks);
         }
-        public static Money DivideOfPair(Money money, int number)
+        public static (int, int) DivideOfPair(Money money, int number)
         {
             money.first /= number;
             money.second /= number;
-            return money;
+            return (money.first, money.second);
         }
         public override string ToString()
         {
