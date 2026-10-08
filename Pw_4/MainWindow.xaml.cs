@@ -17,6 +17,7 @@ namespace Pw_4
     public partial class MainWindow : Window
     {
 
+        IPair pairForChange;
         public MainWindow()
         {
             InitializeComponent();
@@ -185,25 +186,40 @@ namespace Pw_4
             }
             else if (btn_delete_item.Visibility == Visibility.Visible)
             {
-                IPair pair = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-                tb_first_parametr.Text = $"{pair.first}";
-                tb_second_parametr.Text = $"{pair.second}";
+                pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                tb_first_parametr.Text = $"{pairForChange.first}";
+                tb_second_parametr.Text = $"{pairForChange.second}";
             }
             else
             {
                 btn_delete_item.Visibility = Visibility.Visible;
                 btn_change_item.Visibility = Visibility.Visible;
-                IPair pair = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-                tb_first_parametr.Text = $"{pair.first}";
-                tb_second_parametr.Text = $"{pair.second}";
+                pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                tb_first_parametr.Text = $"{pairForChange.first}";
+                tb_second_parametr.Text = $"{pairForChange.second}";
             }
         }
         private void btn_change_item_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(tb_first_parametr.Text, out int firstParametr) && int.TryParse(tb_second_parametr.Text, out int secondParametr))
-            { 
-                Pair pair = (Pair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
-                if ((pair.first == firstParametr) && (pair.second == secondParametr))
+            bool TryParseFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr);
+            bool TryParseSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
+            pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+            if ((TryParseFirst && TryParseSecond) && (pairForChange is Pair))
+            {
+                ChangeItem(pairForChange, firstParametr, secondParametr, listBox_of_objects);
+            }
+            else if ((TryParseFirst && TryParseSecond) && (pairForChange is Money))
+            {
+                if (firstParametr >= 0 && secondParametr >= 0) ChangeItem(pairForChange, firstParametr, secondParametr, listBox_of_objects);
+                else MessageBox.Show("Деньги не могут быть отрицательными");
+            }
+            else
+            {
+                MessageBox.Show("Неккоректно введенные данные");
+            }
+            void ChangeItem(IPair pair, int firstParametr, int secondParametr, ListBox list)
+            {
+                if ((pairForChange.first == firstParametr) && (pairForChange.second == secondParametr))
                 {
                     MessageBox.Show("Введенные параметры ничем ни отличаются от уже имеющихся, изменение не применено");
                 }
@@ -211,13 +227,9 @@ namespace Pw_4
                 {
                     pair.first = firstParametr;
                     pair.second = secondParametr;
-                    listBox_of_objects.Items[listBox_of_objects.SelectedIndex] = pair;
+                    list.Items[listBox_of_objects.SelectedIndex] = pair;
                     ClearFirstSecond();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Неккоректно введенные данные");
             }
         }
         private void btn_delete_item_Click(object sender, RoutedEventArgs e)
