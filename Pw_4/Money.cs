@@ -75,6 +75,10 @@ namespace Pw_4
         {
             return $"Money №{Number}";
         }
+        public static (int, int) operator +(Money money1, Money money2)
+        {
+            return money1.SumOfPair(money1, money2);
+        }
     }
     public class MoneyException : Exception
     {

@@ -31,6 +31,8 @@
             <RadioButton x:Name="rb_two_objects" Content="Два объекта" Foreground="White" Visibility="Collapsed" Checked="rb_two_objects_Checked"/>
             <RadioButton x:Name="rb_three_objects" Content="Три объекта" Foreground="White" Visibility="Collapsed" Checked="rb_three_objects_Checked" IsChecked="True"/>
             <Button x:Name="btn_add_to_list"  Height="20" Margin="5" Content="Добавить в список" Click="btn_add_to_list_Click"/>
+            <Button x:Name ="btn_increment_prefix" Height="20" Margin="5" Content ="Увеличить на 1 все характеристики" Visibility="Collapsed" Click="btn_increment_prefix_Click"/>
+            <Button x:Name ="btn_decrement_prefix" Height="20" Margin="5" Content ="Уменьшить на 1 все характеристики"  Visibility="Collapsed" Click="btn_decrement_prefix_Click"/>
             <Button x:Name="btn_change_item" Height="20" Margin="5" Content="Изменить" Click="btn_change_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_delete_item" Height="20" Margin="5" Content="Удалить из списка" Click="btn_delete_item_Click" Visibility="Collapsed"/>
             <Button x:Name="btn_sum_pair_elements"  Height="20" Margin="5" Content="Сложить элементы пар(ы)" Visibility="Collapsed" Click="btn_sum_pair_elements_Click"/>

@@ -8,7 +8,7 @@ using System.Xml.XPath;
 
 namespace Pw_4
 {
-    public class Pair : ISummableOfSomePair<IPair>
+    public class Pair : ISummableOfSomePair<IPair>, IIncrementableDecrementableOfPair<IPair>
     {
         public virtual int first { get; set; }
         public virtual int second { get; set; }
@@ -35,21 +35,25 @@ namespace Pw_4
             return (pair.first + pair2.first + pair3.first, pair.second + pair2.second + pair3.second);
         }
 
-        public (int, int) IncrementPostFix(Pair pair)
+        public (int, int) IncrementPostFix(IPair pair)
         {
             return (pair.first++, pair.second++);
         }
-        public virtual (int, int) IncrementPreFix(Pair pair)
+        public (int, int) IncrementPreFix(IPair pair)
         {
             return (++pair.first, ++pair.second);
         }
+        public (int, int) DecrementPostFix(IPair pair)
+        {
+            return (pair.first--, pair.second--);
+        }
+        public (int, int) DecrementPreFix(IPair pair)
+        {
+            return (--pair.first, --pair.second);
+        }
         public static (int, int) operator +(Pair pair1, Pair pair2)
         {
-            return (pair1.first + pair2.first, pair1.second + pair2.second);
-        }
-        public static (int, int) operator -(Pair pair, Pair pair2)
-        {
-            return (pair.first - pair2.first, pair.second - pair2.second);
+            return pair1.SumOfPair(pair1, pair2);
         }
         public static Pair operator ++(Pair pair)
         {

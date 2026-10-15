@@ -17,11 +17,11 @@ namespace Pw_4
     public partial class MainWindow : Window
     {
 
-        IPair pairForChange;
         public MainWindow()
         {
             InitializeComponent();
         }
+        //Мои методы
         public void ClearFirstSecond()
         {
             tb_first_parametr.Clear();
@@ -33,7 +33,26 @@ namespace Pw_4
             tb_second_parametr.Clear();
             tb_third_parametr.Clear();
         }
-
+        public void ChangeItem(IPair pair, int firstParametr, int secondParametr, ListBox list)
+        {
+            if ((pair.first == firstParametr) && (pair.second == secondParametr))
+            {
+                MessageBox.Show("Введенные параметры ничем ни отличаются от уже имеющихся, изменение не применено");
+            }
+            else
+            {
+                pair.first = firstParametr;
+                pair.second = secondParametr;
+                list.Items[listBox_of_objects.SelectedIndex] = pair;
+                ClearFirstSecond();
+            }
+        }
+        public void ChangeItem(IPair pair,ListBox list)
+        {
+            list.Items[listBox_of_objects.SelectedIndex] = pair;
+            ClearFirstSecond();
+        }
+        //Методы Впфки
         private void btn_about_programm_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Виденин Андрей Антонович, ИСП-34, Практические работы №4,5,6\nПрактическая работа №4\r\nРабота с классами. Перегрузка методов.\r\n1. Разработать класс по заданию.\r\n2. Разработать программу для демонстрации использования класса и его методов.\r\n3. Предусмотреть в программе две кнопки «Выход» и «О программе», где вывести\r\nФИО разработчика, номер работы и формулировку задания.\n\n\n\r Вариант 2:\r\nСоздать класс Pair (пара чисел). Создать необходимые методы и свойства.\r\nОпределить методы метод сложения полей и операцию сложения пар (а, b) + (с, d)\r\n= (а + c, b + d). Создать перегруженные методы для увеличения полей на 1,\r\nсложения трех пар чисел.\n\n\n\rПрактическая работа №5\r\nОпределение операций в классе\r\n1. Доработать класс разработанный в практической работе №5 по заданию.\r\n2. Разработать программу для демонстрации использования операций класса.\r\n3. Предусмотреть в программе две кнопки «Выход» и «О программе», где вывести\r\nФИО разработчика, номер работы и формулировку задания.\n\n\rВариант 2:\r\nИспользовать класс Pair (пара чисел). Разработать операцию сложения пар (а, b) +\r\n(с, d) = (а + c, b + d). Разработать операцию для уменьшения полей на 1.\n\n\rПрактическая работа №6\r\nСоздание наследованных классов.\r\n1. Доработать класс разработанный в практической работе №6 по заданию.\r\n2. Разработать программу для демонстрации использования производного класса и\r\nего методов.\r\n3. Предусмотреть в программе две кнопки «Выход» и «О программе», где вывести\r\nФИО разработчика, номер работы и формулировку задания.\n\n\n\rИспользовать класс Pair (пара чисел). Определить класс-наследник Money с\r\nхарактеристиками: рубли и копейки. Переопределить операцию сложения и\r\nопределить методы вычитания и деления денежных сумм.");
@@ -183,18 +202,22 @@ namespace Pw_4
             {
                 btn_delete_item.Visibility = Visibility.Collapsed;
                 btn_change_item.Visibility = Visibility.Collapsed;
+                btn_increment_prefix.Visibility = Visibility.Collapsed;
+                btn_decrement_prefix.Visibility = Visibility.Collapsed;
             }
             else if (btn_delete_item.Visibility == Visibility.Visible)
             {
-                pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                IPair pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
                 tb_first_parametr.Text = $"{pairForChange.first}";
                 tb_second_parametr.Text = $"{pairForChange.second}";
             }
             else
             {
+                btn_increment_prefix.Visibility = Visibility.Visible;
+                btn_decrement_prefix.Visibility= Visibility.Visible;
                 btn_delete_item.Visibility = Visibility.Visible;
                 btn_change_item.Visibility = Visibility.Visible;
-                pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+                IPair pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
                 tb_first_parametr.Text = $"{pairForChange.first}";
                 tb_second_parametr.Text = $"{pairForChange.second}";
             }
@@ -203,7 +226,7 @@ namespace Pw_4
         {
             bool TryParseFirst = int.TryParse(tb_first_parametr.Text, out int firstParametr);
             bool TryParseSecond = int.TryParse(tb_second_parametr.Text, out int secondParametr);
-            pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+            IPair pairForChange = (IPair)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
             if ((TryParseFirst && TryParseSecond) && (pairForChange is not Money))
             {
                 ChangeItem(pairForChange, firstParametr, secondParametr, listBox_of_objects);
@@ -220,20 +243,6 @@ namespace Pw_4
             else
             {
                 MessageBox.Show("Неккоректно введенные данные");
-            }
-            void ChangeItem(IPair pair, int firstParametr, int secondParametr, ListBox list)
-            {
-                if ((pairForChange.first == firstParametr) && (pairForChange.second == secondParametr))
-                {
-                    MessageBox.Show("Введенные параметры ничем ни отличаются от уже имеющихся, изменение не применено");
-                }
-                else
-                {
-                    pair.first = firstParametr;
-                    pair.second = secondParametr;
-                    list.Items[listBox_of_objects.SelectedIndex] = pair;
-                    ClearFirstSecond();
-                }
             }
         }
         private void btn_delete_item_Click(object sender, RoutedEventArgs e)
@@ -282,6 +291,19 @@ namespace Pw_4
         {
             listBox_of_objects.Items.Clear();
         }
-
+        private void btn_increment_prefix_Click(object sender, RoutedEventArgs e)
+        {
+            IIncrementableDecrementableOfPair<IPair> pairForChange = (IIncrementableDecrementableOfPair<IPair>)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+            pairForChange.IncrementPreFix(pairForChange);
+            ChangeItem(pairForChange, listBox_of_objects);
+            MessageBox.Show("Параметры были увеличены на 1");
+        }
+        private void btn_decrement_prefix_Click(object sender, RoutedEventArgs e)
+        {
+            IIncrementableDecrementableOfPair<IPair> pairForChange = (IIncrementableDecrementableOfPair<IPair>)listBox_of_objects.Items[listBox_of_objects.SelectedIndex];
+            pairForChange.DecrementPreFix(pairForChange);
+            ChangeItem(pairForChange, listBox_of_objects);
+            MessageBox.Show("Параметры были уменьшены на 1");
+        }
     }
 }
